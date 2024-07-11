@@ -5,6 +5,7 @@ import 'package:foodapp/screens/IntroScreen.dart';
 import 'package:foodapp/screens/MainScreen.dart';
 import 'package:foodapp/screens/auth/LoginScreen.dart';
 import 'package:foodapp/screens/auth/RegisterScreen.dart';
+import 'package:foodapp/screens/foodseprate.dart';
 
 void main() {
   runApp(const Myapp());
@@ -20,7 +21,7 @@ class Myapp extends StatelessWidget {
         '/': (context) => const IntroScreen(),
         '/register': (context) => const RegisterScreen(),
         '/login': (context) => const LoginScreen(),
-        '/main': (context) => MainScreen(),
+        '/main': (context) => const MainScreen(),
       },
     );
   }

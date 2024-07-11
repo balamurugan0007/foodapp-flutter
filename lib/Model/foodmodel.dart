@@ -1,11 +1,13 @@
 class Food {
-  Food(
-      {required this.desc,
-      required this.foodimg,
-      required this.foodname,
-      required this.price,
-      required this.rate,
-      required this.cat});
+  Food({
+    required this.desc,
+    required this.foodimg,
+    required this.foodname,
+    required this.price,
+    required this.rate,
+    required this.cat,
+    required this.hotalname,
+  });
 
   final String foodname;
   final String foodimg;
@@ -13,6 +15,7 @@ class Food {
   final int price;
   final String rate;
   final String cat;
+  final String hotalname;
 
   static List<Food> foodlist = [
     Food(
@@ -22,7 +25,8 @@ class Food {
         foodname: 'Pizza',
         price: 390,
         rate: '4.5',
-        cat: 'fast'),
+        cat: 'fast',
+        hotalname: 'Suvai'),
     Food(
         desc: '',
         foodimg:
@@ -30,7 +34,8 @@ class Food {
         foodname: 'Burger',
         price: 220,
         rate: '4.2',
-        cat: 'fast'),
+        cat: 'fast',
+        hotalname: 'Kannappa'),
     Food(
         desc: '',
         foodimg:
@@ -38,7 +43,8 @@ class Food {
         foodname: 'Shawarma',
         price: 199,
         rate: '4.6',
-        cat: 'fast'),
+        cat: 'fast',
+        hotalname: 'Kannappa'),
     Food(
         desc: '',
         foodimg:
@@ -46,7 +52,8 @@ class Food {
         foodname: 'SandWitch',
         price: 149,
         rate: '4.1',
-        cat: 'fast'),
+        cat: 'fast',
+        hotalname: 'Kannappa'),
     Food(
         desc: '',
         foodimg:
@@ -54,7 +61,8 @@ class Food {
         foodname: 'Hot Dog',
         price: 260,
         rate: '3.9',
-        cat: 'fast'),
+        cat: 'fast',
+        hotalname: 'Banana Leaf'),
     Food(
         desc: '',
         foodimg:
@@ -62,7 +70,8 @@ class Food {
         foodname: 'Mutton Briyani',
         price: 320,
         rate: '4.7',
-        cat: 'br'),
+        cat: 'br',
+        hotalname: 'Kannappa'),
     Food(
         desc: '',
         foodimg:
@@ -70,7 +79,8 @@ class Food {
         foodname: 'Chicken Briyani',
         price: 259,
         rate: '4.8',
-        cat: 'br'),
+        cat: 'br',
+        hotalname: 'Banana Leaf'),
     Food(
         desc: '',
         foodimg:
@@ -78,7 +88,8 @@ class Food {
         foodname: 'Egg Briyani',
         price: 190,
         rate: '4.1',
-        cat: 'br'),
+        cat: 'br',
+        hotalname: 'Suvai'),
     Food(
         desc: '',
         foodimg:
@@ -86,7 +97,8 @@ class Food {
         foodname: 'Fish Briyani',
         price: 290,
         rate: '4.0',
-        cat: 'br'),
+        cat: 'br',
+        hotalname: 'Banana Leaf'),
     Food(
         desc: '',
         foodimg:
@@ -94,7 +106,8 @@ class Food {
         foodname: 'Grilled Chicken',
         price: 320,
         rate: '4.9',
-        cat: 'st'),
+        cat: 'st',
+        hotalname: 'Suvai'),
     Food(
         desc: '',
         foodimg:
@@ -102,7 +115,8 @@ class Food {
         foodname: 'Chicken 65',
         price: 260,
         rate: '4.3',
-        cat: 'st'),
+        cat: 'st',
+        hotalname: 'Suvai'),
     Food(
         desc: '',
         foodimg:
@@ -110,7 +124,8 @@ class Food {
         foodname: 'Mutton Chukaa',
         price: 210,
         rate: '4.4',
-        cat: 'st'),
+        cat: 'st',
+        hotalname: 'Suvai'),
     Food(
         desc: '',
         foodimg:
@@ -118,7 +133,8 @@ class Food {
         foodname: 'Fish Fry',
         price: 169,
         rate: '4.6',
-        cat: 'st'),
+        cat: 'st',
+        hotalname: 'Suvai'),
     Food(
         desc: '',
         foodimg:
@@ -126,6 +142,7 @@ class Food {
         foodname: 'Prawan Fry',
         price: 179,
         rate: '4.1',
-        cat: 'st')
+        cat: 'st',
+        hotalname: 'Suvai')
   ];
 }

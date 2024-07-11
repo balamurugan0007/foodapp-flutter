@@ -22,7 +22,6 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void _ontapItem(index) {
-    print('hell');
     setState(() {
       print('changing the index $index');
       _selectedIndex = index;
@@ -30,10 +29,10 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   List<Widget> screens = [
-    FoodviewScreen(),
-    Text('hello'),
-    Text('hello'),
-    ProfileScreen(),
+    const FoodviewScreen(),
+    const Text('hello'),
+    const Text('hello'),
+    const ProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {

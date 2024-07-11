@@ -1,17 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:foodapp/Model/foodmodel.dart';
-import 'package:foodapp/widgets/card/Foodpic_card.dart';
+import 'package:foodapp/widgets/home/food_widget.dart';
+import 'package:foodapp/widgets/home/hotel_widget.dart';
 
-class FoodviewScreen extends StatelessWidget {
+class FoodviewScreen extends StatefulWidget {
   const FoodviewScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    List _fastfood = Food.foodlist.where((data) => data.cat == 'fast').toList();
-    List _briyani = Food.foodlist.where((data) => data.cat == 'br').toList();
-    List _sidedish = Food.foodlist.where((data) => data.cat == 'st').toList();
+  State<FoodviewScreen> createState() => _FoodviewScreenState();
+}
 
+class _FoodviewScreenState extends State<FoodviewScreen> {
+  int _screen = 0;
+
+  List mainscreens = [
+    const foodview_widget(),
+    const hotel_wideget(),
+  ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _screen = 0;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         physics: const ScrollPhysics(),
@@ -111,29 +126,47 @@ class FoodviewScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (_screen != 0) {
+                        setState(() {
+                          _screen = 0;
+                        });
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
                       fixedSize: const Size(130, 60),
-                      backgroundColor: Colors.orange[600],
+                      backgroundColor:
+                          _screen == 0 ? Colors.orange[600] : Colors.white,
                     ),
-                    child: const Text('Foods',
+                    child: Text('Foods',
                         style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
-                            color: Colors.white)),
+                            color: _screen == 0
+                                ? Colors.white
+                                : Colors.black.withOpacity(.6))),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (_screen != 1) {
+                        setState(() {
+                          _screen = 1;
+                        });
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
                         fixedSize: const Size(130, 60),
-                        backgroundColor: Colors.white,
+                        backgroundColor:
+                            _screen == 1 ? Colors.orange[600] : Colors.white,
                         elevation: 0.6),
                     child: Text('Hotels',
                         style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                             letterSpacing: .5,
-                            color: Colors.black.withOpacity(.6))),
+                            color: _screen == 1
+                                ? Colors.white
+                                : Colors.black.withOpacity(.6))),
                   ),
                 ],
               ),
@@ -142,77 +175,8 @@ class FoodviewScreen extends StatelessWidget {
               height: 20,
             ),
             SizedBox(
-                height: 260,
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: _fastfood.length,
-                    itemBuilder: (ctx, i) {
-                      final food = _fastfood[i];
-
-                      return FoodPicCard(
-                        foodmodel: food,
-                      );
-                    })),
-            const SizedBox(
-              height: 10,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                'Briyani lovers ',
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                  color: Colors.black.withOpacity(.75),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-                height: 280,
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: _briyani.length,
-                    itemBuilder: (ctx, i) {
-                      final food = _briyani[i];
-
-                      return FoodPicCard(
-                        foodmodel: food,
-                      );
-                    })),
-            const SizedBox(
-              height: 10,
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                'Secondary Dishes',
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                  color: Colors.black.withOpacity(.75),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-                height: 280,
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: _sidedish.length,
-                    itemBuilder: (ctx, i) {
-                      final food = _sidedish[i];
-
-                      return FoodPicCard(
-                        foodmodel: food,
-                      );
-                    })),
+              child: mainscreens[_screen],
+            )
           ],
         ),
       ),
