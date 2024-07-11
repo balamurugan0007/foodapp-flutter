@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:foodapp/screens/Homsecreen.dart';
+
 import 'package:foodapp/screens/ProfileScreen.dart';
+import 'package:foodapp/screens/foodviewscreen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({
@@ -29,10 +30,10 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   List<Widget> screens = [
-    HomeScreen(),
+    FoodviewScreen(),
     Text('hello'),
     Text('hello'),
-    ProfileScreen()
+    ProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -53,10 +54,10 @@ class _MainScreenState extends State<MainScreen> {
               label: 'home'),
           BottomNavigationBarItem(
               icon: Icon(
-                Icons.shopping_cart_checkout_outlined,
+                Icons.shopping_cart_checkout,
                 size: 26,
               ),
-              label: 'Notification'),
+              label: 'Orders'),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.favorite_outline,
@@ -65,7 +66,7 @@ class _MainScreenState extends State<MainScreen> {
               label: 'favourite'),
           BottomNavigationBarItem(
               icon: Icon(
-                Icons.account_circle_outlined,
+                Icons.account_circle,
                 size: 26,
               ),
               label: 'Account'),

@@ -54,7 +54,7 @@ class IntroScreen extends StatelessWidget {
                   fixedSize: const Size(300, 50),
                 ),
                 child: Text(
-                  'Continue',
+                  'Order now ',
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,

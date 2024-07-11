@@ -10,43 +10,54 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final _formkey = GlobalKey<FormState>();
   var regualarfont = const TextStyle(
       fontSize: 16, fontWeight: FontWeight.w500, color: Colors.black87);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(
             height: 50,
           ),
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Icon(
-                Icons.arrow_back_ios_new,
-                size: 28,
-                color: Colors.black87,
+              InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: const Icon(
+                  Icons.arrow_back_ios_new,
+                  size: 28,
+                  color: Colors.black87,
+                ),
               ),
-              Row(
-                children: [
-                  Text(
-                    'Skip',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: Colors.black26),
-                  ),
-                  Icon(
-                    Icons.arrow_right_rounded,
-                    size: 28,
-                    color: Colors.black26,
-                  ),
-                ],
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).pushReplacementNamed('/main');
+                },
+                child: const Row(
+                  children: [
+                    Text(
+                      'Skip',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.black26),
+                    ),
+                    Icon(
+                      Icons.arrow_right_rounded,
+                      size: 28,
+                      color: Colors.black26,
+                    ),
+                  ],
+                ),
               )
             ],
           ),
@@ -58,88 +69,113 @@ class _RegisterScreenState extends State<RegisterScreen> {
             style: TextStyle(
                 fontWeight: FontWeight.bold, fontSize: 28, color: Colors.black),
           ),
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
-          Padding(
-            padding: EdgeInsets.all(10),
-            child: Container(
-              padding: EdgeInsets.only(left: 10, right: 10),
-              decoration: BoxDecoration(
-                color: Colors.black12.withOpacity(.1),
-                borderRadius: BorderRadius.circular(32),
-              ),
-              child: const TextField(
-                decoration: InputDecoration(
-                    prefixIcon: Icon(
-                      Icons.account_circle,
-                      size: 24,
-                      color: Colors.black,
+          Container(
+            child: Form(
+                key: _formkey,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Container(
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        decoration: BoxDecoration(
+                          color: Colors.black12.withOpacity(.1),
+                          borderRadius: BorderRadius.circular(32),
+                        ),
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Enter your username';
+                            }
+                          },
+                          decoration: const InputDecoration(
+                              prefixIcon: Icon(
+                                Icons.account_circle,
+                                size: 24,
+                                color: Colors.black,
+                              ),
+                              border: InputBorder.none,
+                              hintText: 'User name',
+                              hintStyle: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              )),
+                        ),
+                      ),
                     ),
-                    border: InputBorder.none,
-                    hintText: 'User name',
-                    hintStyle: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    )),
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(10),
-            child: Container(
-              padding: EdgeInsets.only(left: 10, right: 10),
-              decoration: BoxDecoration(
-                color: Colors.black12.withOpacity(.1),
-                borderRadius: BorderRadius.circular(32),
-              ),
-              child: const TextField(
-                decoration: InputDecoration(
-                    prefixIcon: Icon(
-                      Icons.mail,
-                      size: 24,
-                      color: Colors.black,
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Container(
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        decoration: BoxDecoration(
+                          color: Colors.black12.withOpacity(.1),
+                          borderRadius: BorderRadius.circular(32),
+                        ),
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Enter your email';
+                            }
+                          },
+                          decoration: const InputDecoration(
+                              prefixIcon: Icon(
+                                Icons.mail,
+                                size: 24,
+                                color: Colors.black,
+                              ),
+                              border: InputBorder.none,
+                              hintText: ' Email Address',
+                              hintStyle: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              )),
+                        ),
+                      ),
                     ),
-                    border: InputBorder.none,
-                    hintText: ' Email Address',
-                    hintStyle: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    )),
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(10),
-            child: Container(
-              padding: EdgeInsets.only(left: 10, right: 10),
-              decoration: BoxDecoration(
-                color: Colors.black12.withOpacity(.1),
-                borderRadius: BorderRadius.circular(32),
-              ),
-              child: const TextField(
-                decoration: InputDecoration(
-                    prefixIcon: Icon(
-                      Icons.lock,
-                      size: 24,
-                      color: Colors.black,
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Container(
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        decoration: BoxDecoration(
+                          color: Colors.black12.withOpacity(.1),
+                          borderRadius: BorderRadius.circular(32),
+                        ),
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Enter your Password';
+                            }
+                          },
+                          decoration: const InputDecoration(
+                              prefixIcon: Icon(
+                                Icons.lock,
+                                size: 24,
+                                color: Colors.black,
+                              ),
+                              border: InputBorder.none,
+                              hintText: 'Password',
+                              hintStyle: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              )),
+                        ),
+                      ),
                     ),
-                    border: InputBorder.none,
-                    hintText: 'Password',
-                    hintStyle: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    )),
-              ),
-            ),
+                  ],
+                )),
           ),
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
           Center(
               child: ElevatedButton(
             onPressed: () {
-              Navigator.of(context).pushNamed('/login');
+              if (_formkey.currentState!.validate()) {
+                Navigator.of(context).pushNamed('/login');
+              }
             },
             style: ElevatedButton.styleFrom(
               fixedSize: const Size(330, 50),
@@ -156,27 +192,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
           const SizedBox(
             height: 25,
           ),
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'Already have an Account',
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                     color: Colors.black87),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
               InkWell(
-                child: Text(
+                child: const Text(
                   'Login',
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                       color: Colors.orange),
                 ),
+                onTap: () {
+                  Navigator.of(context).pushNamed('/login');
+                },
               )
             ],
           ),

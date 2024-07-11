@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:foodapp/screens/Homsecreen.dart';
+
 import 'package:foodapp/screens/IntroScreen.dart';
 import 'package:foodapp/screens/MainScreen.dart';
-
 import 'package:foodapp/screens/auth/LoginScreen.dart';
 import 'package:foodapp/screens/auth/RegisterScreen.dart';
 
 void main() {
-  runApp(Myapp());
+  runApp(const Myapp());
 }
 
 class Myapp extends StatelessWidget {

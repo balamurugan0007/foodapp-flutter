@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:foodapp/screens/ProfileScreen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -21,32 +22,38 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(
               height: 50,
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Icon(
-                  Icons.arrow_back_ios_new,
-                  size: 28,
-                  color: Colors.black87,
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Icon(
+                    Icons.arrow_back_ios_new,
+                    size: 28,
+                    color: Colors.black87,
+                  ),
                 ),
-                Row(
-                  children: [
-                    InkWell(
-                      child: Text(
+                InkWell(
+                  onTap: () {},
+                  child: const Row(
+                    children: [
+                      Text(
                         'Skip',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
                             color: Colors.black26),
                       ),
-                    ),
-                    Icon(
-                      Icons.arrow_right_rounded,
-                      size: 28,
-                      color: Colors.black26,
-                    ),
-                  ],
+                      Icon(
+                        Icons.arrow_right_rounded,
+                        size: 28,
+                        color: Colors.black26,
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),
@@ -134,27 +141,30 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(
               height: 30,
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  'Already have an Account',
+                const Text(
+                  "Don't have an Account",
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                       color: Colors.black87),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 InkWell(
-                  child: Text(
-                    'Login',
+                  child: const Text(
+                    'Create Account',
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                         color: Colors.orange),
                   ),
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/register');
+                  },
                 )
               ],
             ),
