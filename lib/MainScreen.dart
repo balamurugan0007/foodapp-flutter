@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:foodapp/screens/ProfileScreen.dart';
-import 'package:foodapp/screens/foodviewscreen.dart';
+
+import 'package:foodapp/screens/home/homescreen.dart';
+import 'package:foodapp/screens/whisListScreen/favScreen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({
@@ -29,9 +31,9 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   List<Widget> screens = [
-    const FoodviewScreen(),
+    const Homescreen(),
     const Text('hello'),
-    const Text('hello'),
+    const Favscreen(),
     const ProfileScreen(),
   ];
   @override

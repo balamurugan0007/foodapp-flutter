@@ -145,4 +145,13 @@ class Food {
         cat: 'st',
         hotalname: 'Suvai')
   ];
+
+  static List fastfood =
+      Food.foodlist.where((data) => data.cat == 'fast').toList();
+  static List briyani =
+      Food.foodlist.where((data) => data.cat == 'br').toList();
+  static List sidedish =
+      Food.foodlist.where((data) => data.cat == 'st').toList();
+
+  static List<Food> addcart = [];
 }

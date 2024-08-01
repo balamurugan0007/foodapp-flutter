@@ -7,9 +7,9 @@ class foodview_widget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List fastfood = Food.foodlist.where((data) => data.cat == 'fast').toList();
-    List briyani = Food.foodlist.where((data) => data.cat == 'br').toList();
-    List sidedish = Food.foodlist.where((data) => data.cat == 'st').toList();
+    List fastfood = Food.fastfood;
+    List briyani = Food.briyani;
+    List sidedish = Food.sidedish;
 
     return Container(
       child: Column(
