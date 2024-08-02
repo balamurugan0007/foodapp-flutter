@@ -9,10 +9,7 @@ final class HomeInitial extends HomeState {}
 
 class HomeFoodDataState extends HomeState {}
 
-class HomeHoteDataState extends HomeState {
-  final List<Hotels> hotel;
-  HomeHoteDataState({required this.hotel});
-}
+class HomeHoteDataState extends HomeState {}
 
 class HotelSeprateScreenNavigateState extends HomeState {
   final Hotels hotels;

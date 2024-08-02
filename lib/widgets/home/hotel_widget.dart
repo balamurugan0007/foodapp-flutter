@@ -16,14 +16,15 @@ class hotel_wideget extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       child: ListView.builder(
         itemCount: hotel.length,
+        scrollDirection: Axis.vertical,
         itemBuilder: (context, index) {
           return Column(
             children: [
               InkWell(
-                onTap: () {
-                  homeBloc.add(
-                      HotelScreenSeprateHotelClickedEvent(hotel: hotel[index]));
-                },
+                // onTap: () {
+                //   homeBloc.add(
+                //       HotelScreenSeprateHotelClickedEvent(hotel: hotel[index]));
+                // },
                 child: Hotelpic_card(hotels: hotel[index]),
               ),
               const SizedBox(height: 20),

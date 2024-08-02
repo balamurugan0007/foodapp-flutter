@@ -158,7 +158,7 @@ class _HomescreenState extends State<Homescreen> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      homeBloc.add(HotelButtonClickedEvent());
+                      // homeBloc.add(HotelButtonClickedEvent());
                     },
                     style: ElevatedButton.styleFrom(
                       fixedSize: const Size(130, 60),
@@ -197,13 +197,14 @@ class _HomescreenState extends State<Homescreen> {
                     _screen = 1;
                     widscreen = hotel_wideget();
                   });
-                } else if (state is HotelSeprateScreenNavigateState) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              Hotelscreen(data: state.hotels)));
                 }
+                // else if (state is HotelSeprateScreenNavigateState) {
+                //   Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //           builder: (context) =>
+                //               Hotelscreen(data: state.hotels)));
+                // }
               },
               builder: (context, state) {
                 return Container(child: widscreen);

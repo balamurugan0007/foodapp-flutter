@@ -35,6 +35,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   font_awesome_flutter: ^10.7.0
   graphql_flutter: ^5.1.2
+  awesome_snackbar_content: ^0.1.3
  
 
 

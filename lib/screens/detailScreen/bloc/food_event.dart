@@ -8,7 +8,12 @@ class WishlistAddorRemoveEvent extends FoodEvent {
   WishlistAddorRemoveEvent({required this.data});
 }
 
-class CartitemsAddEvent extends FoodEvent {}
+class CartitemsAddEvent extends FoodEvent {
+  final CartModel cart;
+  CartitemsAddEvent({required this.cart});
+}
+
+class CartItemCheckEvent extends FoodEvent {}
 
 class FoodBuyEvent extends FoodEvent {}
 
