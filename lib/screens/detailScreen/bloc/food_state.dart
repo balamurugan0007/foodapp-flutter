@@ -7,7 +7,8 @@ final class FoodInitial extends FoodState {}
 
 class FoodWhishListState extends FoodState {
   final String msg;
-  FoodWhishListState({required this.msg});
+  final bool result;
+  FoodWhishListState({required this.msg, required this.result});
 }
 
 class FoodAddedCartItemsState extends FoodState {
@@ -18,5 +19,12 @@ class FoodAddedCartItemsState extends FoodState {
 
 class FoodIncartItemsCheckState extends FoodState {
   final bool iscartItem;
-  FoodIncartItemsCheckState({required this.iscartItem});
+  final int count;
+  FoodIncartItemsCheckState({required this.iscartItem, required this.count});
+}
+
+class FoodSeprateInCartState extends FoodState {
+  final bool iscartItem;
+
+  FoodSeprateInCartState({required this.iscartItem});
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; // Ensure you have this import for BlocConsumer
+import 'package:foodapp/components/home/search.dart';
 import 'package:foodapp/screens/home/bloc/home_bloc.dart';
 import 'package:foodapp/screens/hotels/hotelScreen.dart';
 import 'package:foodapp/widgets/home/food_widget.dart';
@@ -17,12 +18,17 @@ class _HomescreenState extends State<Homescreen> {
   final HomeBloc homeBloc = HomeBloc();
   int _screen = 0; // Move _screen here to maintain state
 
-  Widget widscreen = foodview_widget();
-
   @override
   void dispose() {
     homeBloc.close(); // Close the bloc when the screen is disposed
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    homeBloc.add(FoodButtonClickedEvent());
   }
 
   @override
@@ -84,52 +90,10 @@ class _HomescreenState extends State<Homescreen> {
               ),
             ),
             const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.only(left: 5),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(.1),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const TextField(
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          prefixIcon: Icon(Icons.search),
-                          hintText: 'Search',
-                          hintStyle: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w400),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Implement search functionality
-                    },
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(100, 50),
-                      backgroundColor: Colors.orange[600],
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: const Text(
-                      'Search',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+
+            //search
+            const Searchcomponet(),
+
             const SizedBox(height: 30),
             Container(
               height: 50,
@@ -158,7 +122,7 @@ class _HomescreenState extends State<Homescreen> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      // homeBloc.add(HotelButtonClickedEvent());
+                      homeBloc.add(HotelButtonClickedEvent());
                     },
                     style: ElevatedButton.styleFrom(
                       fixedSize: const Size(130, 60),
@@ -190,24 +154,27 @@ class _HomescreenState extends State<Homescreen> {
                 if (state is HomeFoodDataState) {
                   setState(() {
                     _screen = 0;
-                    widscreen = foodview_widget();
                   });
                 } else if (state is HomeHoteDataState) {
                   setState(() {
                     _screen = 1;
-                    widscreen = hotel_wideget();
                   });
+                } else if (state is HotelSeprateScreenNavigateState) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              Hotelscreen(data: state.hotelname)));
                 }
-                // else if (state is HotelSeprateScreenNavigateState) {
-                //   Navigator.push(
-                //       context,
-                //       MaterialPageRoute(
-                //           builder: (context) =>
-                //               Hotelscreen(data: state.hotels)));
-                // }
               },
               builder: (context, state) {
-                return Container(child: widscreen);
+                if (state is HomeFoodDataState) {
+                  return const foodview_widget();
+                } else if (state is HomeHoteDataState) {
+                  return HotelWidget(hotelData: state.data);
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
               },
             )),
           ],

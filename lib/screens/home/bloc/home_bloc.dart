@@ -21,7 +21,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   FutureOr<void> hotelButtonClickedEvent(
       HotelButtonClickedEvent event, Emitter<HomeState> emit) {
-    emit(HomeHoteDataState());
+    emit(HomeHoteDataState(data: Hotels.hotalList));
   }
 
   FutureOr<void> foodButtonClickedEvent(
@@ -31,6 +31,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   FutureOr<void> hotelScreenSeprateHotelClickedEvent(
       HotelScreenSeprateHotelClickedEvent event, Emitter<HomeState> emit) {
-    emit(HotelSeprateScreenNavigateState(hotels: event.hotel));
+    emit(HotelSeprateScreenNavigateState(hotelname: event.name));
   }
 }

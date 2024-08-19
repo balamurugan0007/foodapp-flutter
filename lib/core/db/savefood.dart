@@ -4,7 +4,7 @@ class SaveProduct {
   static List<Food> saveList = [];
 
   // Method to toggle product in the cart
-  static Future<String> toggleProductInwish(Food data) async {
+  static Future<Map> toggleProductInwish(Food data) async {
     // Check if the product is already in the cart
     final exists = saveList.any((item) =>
         item.hotalname == data.hotalname && item.foodname == item.foodname);
@@ -13,11 +13,17 @@ class SaveProduct {
       // If it exists, remove it from the cart
       saveList.removeWhere((item) =>
           item.hotalname == data.hotalname && item.foodname == item.foodname);
-      return "${data.foodname} has removed from Whishlist";
+      return {
+        "data": "${data.foodname} has removed from Whishlist",
+        "result": false
+      };
     } else {
       // If it does not exist, add it to the cart
       saveList.add(data);
-      return "${data.foodname} has Added in your  Whishlist";
+      return {
+        "data": "${data.foodname} has removed from Whishlist",
+        "result": true
+      };
     }
   }
 

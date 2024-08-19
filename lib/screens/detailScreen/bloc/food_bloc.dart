@@ -18,12 +18,14 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
     on<WishlistAddorRemoveEvent>(wishlistAddorRemoveEvent);
     on<CartitemsAddEvent>(cartitemsAddEvent);
     on<CartItemCheckEvent>(cartItemCheckEvent);
+    on<SeprateFoodInCart>(seprateFoodInCart);
+    on<CartItemsRemoveEvent>(cartItemsRemoveEvent);
   }
 
   FutureOr<void> wishlistAddorRemoveEvent(
       WishlistAddorRemoveEvent event, Emitter<FoodState> emit) async {
-    String Item = await SaveProduct.toggleProductInwish(event.data);
-    emit(FoodWhishListState(msg: Item));
+    Map Item = await SaveProduct.toggleProductInwish(event.data);
+    emit(FoodWhishListState(msg: Item['data'], result: Item['result']));
   }
 
   FutureOr<void> cartitemsAddEvent(
@@ -34,10 +36,21 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
 
   FutureOr<void> cartItemCheckEvent(
       CartItemCheckEvent event, Emitter<FoodState> emit) {
-    if (CartItems.saveList.length == 0) {
-      emit(FoodIncartItemsCheckState(iscartItem: false));
+    int val = CartItems.CartItemsCount();
+
+    if (val == 0) {
+      emit(FoodIncartItemsCheckState(iscartItem: false, count: 0));
     } else {
-      emit(FoodIncartItemsCheckState(iscartItem: true));
+      emit(FoodIncartItemsCheckState(iscartItem: true, count: val));
     }
   }
+
+  FutureOr<void> seprateFoodInCart(
+      SeprateFoodInCart event, Emitter<FoodState> emit) {
+    final bool val = CartItems.particularFoodIncart(event.data);
+    emit(FoodSeprateInCartState(iscartItem: val));
+  }
+
+  FutureOr<void> cartItemsRemoveEvent(
+      CartItemsRemoveEvent event, Emitter<FoodState> emit) {}
 }

@@ -11,6 +11,7 @@ import 'package:foodapp/screens/detailScreen/bloc/food_bloc.dart';
 
 import 'package:foodapp/widgets/card/Foodpic_card.dart';
 import 'package:foodapp/widgets/cart/GlobalcartWidget.dart';
+import 'package:foodapp/widgets/detail/foodGrid%20Layout.dart';
 
 class SeperatefoodScreen extends StatefulWidget {
   const SeperatefoodScreen(
@@ -28,6 +29,8 @@ class _SeperatefoodScreenState extends State<SeperatefoodScreen> {
   final FoodBloc foodBloc = FoodBloc();
   bool save = false;
   bool cart = false;
+  int cartItemsCount = 0;
+  bool clickedfoodIncart = false;
   @override
   void initState() {
     super.initState();
@@ -35,6 +38,8 @@ class _SeperatefoodScreenState extends State<SeperatefoodScreen> {
         Food.foodlist.where((data) => data.cat == widget.foodcat).toList();
     save = SaveProduct.isProductInWhislist(widget.food);
     cart = CartItems.CartItemCheck();
+    cartItemsCount = CartItems.CartItemsCount();
+    foodBloc.add(SeprateFoodInCart(data: CartModel(data: widget.food, Qty: 1)));
   }
 
   @override
@@ -51,7 +56,8 @@ class _SeperatefoodScreenState extends State<SeperatefoodScreen> {
                 message: state.msg,
 
                 /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
-                contentType: ContentType.success,
+                contentType:
+                    state.result ? ContentType.success : ContentType.failure,
                 titleFontSize: 16,
                 messageFontSize: 12,
               ),
@@ -65,6 +71,11 @@ class _SeperatefoodScreenState extends State<SeperatefoodScreen> {
           } else if (state is FoodIncartItemsCheckState) {
             setState(() {
               cart = state.iscartItem;
+              cartItemsCount = state.count;
+            });
+          } else if (state is FoodSeprateInCartState) {
+            setState(() {
+              clickedfoodIncart = state.iscartItem;
             });
           }
         },
@@ -125,10 +136,15 @@ class _SeperatefoodScreenState extends State<SeperatefoodScreen> {
                                   foodmodel: food,
                                 );
                               })),
+                      const DetailScreenGridFoodsTile()
                     ],
                   ),
                 ),
-                cart ? Globalcartwidget() : Text('.')
+                cart
+                    ? Globalcartwidget(
+                        cartItemCount: cartItemsCount,
+                      )
+                    : const Text('.'),
               ],
             ),
           );
@@ -145,7 +161,7 @@ class _SeperatefoodScreenState extends State<SeperatefoodScreen> {
       child: Padding(
           padding: const EdgeInsets.all(20),
           child: Container(
-            height: 310,
+            height: 250,
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
@@ -277,29 +293,10 @@ class _SeperatefoodScreenState extends State<SeperatefoodScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        OutlinedButton.icon(
-          onPressed: () {
-            CartModel val = new CartModel(data: widget.food, Qty: 1);
-            foodBloc.add(CartitemsAddEvent(cart: val));
-
-            foodBloc.add(CartItemCheckEvent());
-          },
-          icon: Icon(
-            Icons.shopping_cart,
-            color: Colors.orange[800],
-          ),
-          label: Text(
-            'Cart',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-              color: Colors.orange[800],
-            ),
-          ),
-          style: OutlinedButton.styleFrom(
-            fixedSize: const Size(130, 50),
-            side: BorderSide(color: Colors.orange[800]!),
-          ),
+        SizedBox(
+          child: clickedfoodIncart == true
+              ? _FoodcartRemoveButton()
+              : _FoodcartAddButton(),
         ),
         ElevatedButton.icon(
           onPressed: () {},
@@ -323,6 +320,63 @@ class _SeperatefoodScreenState extends State<SeperatefoodScreen> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _FoodcartAddButton() {
+    return OutlinedButton.icon(
+      onPressed: () {
+        CartModel val = new CartModel(data: widget.food, Qty: 1);
+        foodBloc.add(CartitemsAddEvent(cart: val));
+
+        foodBloc.add(CartItemCheckEvent());
+      },
+      icon: FaIcon(
+        FontAwesomeIcons.basketShopping,
+        size: 21,
+        color: ColorsConst.primary,
+      ),
+      label: Text(
+        'Cart',
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w600,
+          color: Colors.orange[800],
+        ),
+      ),
+      style: OutlinedButton.styleFrom(
+        fixedSize: const Size(130, 50),
+        side: BorderSide(color: Colors.orange[800]!),
+      ),
+    );
+  }
+
+  Widget _FoodcartRemoveButton() {
+    return OutlinedButton.icon(
+      onPressed: () {
+        CartModel val = new CartModel(data: widget.food, Qty: 1);
+        foodBloc.add(CartitemsAddEvent(cart: val));
+
+        foodBloc.add(CartItemCheckEvent());
+        foodBloc
+            .add(SeprateFoodInCart(data: CartModel(data: widget.food, Qty: 1)));
+      },
+      icon: Icon(
+        Icons.delete,
+        color: Colors.orange[800],
+      ),
+      label: Text(
+        'Remove',
+        style: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color: Colors.orange[800],
+        ),
+      ),
+      style: OutlinedButton.styleFrom(
+        fixedSize: const Size(130, 50),
+        side: BorderSide(color: Colors.orange[800]!),
+      ),
     );
   }
 }

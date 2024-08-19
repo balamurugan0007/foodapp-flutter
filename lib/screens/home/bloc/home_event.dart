@@ -10,6 +10,6 @@ class HotelButtonClickedEvent extends HomeEvent {}
 class FoodButtonClickedEvent extends HomeEvent {}
 
 class HotelScreenSeprateHotelClickedEvent extends HomeEvent {
-  final Hotels hotel;
-  HotelScreenSeprateHotelClickedEvent({required this.hotel});
+  final String name;
+  HotelScreenSeprateHotelClickedEvent({required this.name});
 }

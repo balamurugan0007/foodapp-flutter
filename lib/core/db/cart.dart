@@ -1,5 +1,5 @@
 import 'package:foodapp/Model/cartmodel.dart';
-import 'package:foodapp/Model/foodmodel.dart';
+
 
 class CartItems {
   static List<CartModel> saveList = [];
@@ -12,9 +12,8 @@ class CartItems {
 
   // Method to remove a product from the wishlist
   static Future<String> removeProductFromCartList(CartModel data) async {
-    final index = saveList.indexWhere((item) =>
-        item.data.hotalname == data.data.hotalname &&
-        item.data.foodname == data.data.foodname);
+    final index =
+        saveList.indexWhere((item) => item.data.foodname == data.data.foodname);
 
     if (index != -1) {
       saveList.removeAt(index);
@@ -29,6 +28,24 @@ class CartItems {
       return false;
     } else {
       return true;
+    }
+  }
+
+  static int CartItemsCount() {
+    if (saveList.length == 0) {
+      return 0;
+    } else {
+      return saveList.length;
+    }
+  }
+
+  static bool particularFoodIncart(CartModel item) {
+    final exist = saveList.any((data) => data.data == item.data);
+
+    if (exist) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

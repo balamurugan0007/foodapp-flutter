@@ -13,6 +13,11 @@ class CartitemsAddEvent extends FoodEvent {
   CartitemsAddEvent({required this.cart});
 }
 
+class CartItemsRemoveEvent extends FoodEvent {
+  final CartModel cartdata;
+  CartItemsRemoveEvent({required this.cartdata});
+}
+
 class CartItemCheckEvent extends FoodEvent {}
 
 class FoodBuyEvent extends FoodEvent {}
@@ -20,4 +25,10 @@ class FoodBuyEvent extends FoodEvent {}
 class FoodRelatedItems extends FoodEvent {
   final String cat;
   FoodRelatedItems({required this.cat});
+}
+
+class SeprateFoodInCart extends FoodEvent {
+  final CartModel data;
+
+  SeprateFoodInCart({required this.data});
 }

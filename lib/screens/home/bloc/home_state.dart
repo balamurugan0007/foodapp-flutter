@@ -9,10 +9,13 @@ final class HomeInitial extends HomeState {}
 
 class HomeFoodDataState extends HomeState {}
 
-class HomeHoteDataState extends HomeState {}
+class HomeHoteDataState extends HomeState {
+  final List<Hotels> data;
+  HomeHoteDataState({required this.data});
+}
 
 class HotelSeprateScreenNavigateState extends HomeState {
-  final Hotels hotels;
+  final String hotelname;
 
-  HotelSeprateScreenNavigateState({required this.hotels});
+  HotelSeprateScreenNavigateState({required this.hotelname});
 }
